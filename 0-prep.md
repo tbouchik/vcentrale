@@ -74,9 +74,11 @@ Il faut expliciter le plus possible les modèles de menace afin de voir plus fac
 
 # Failles au niveau du mécanisme de défense:
 
+Contrairement aux deux parties précédentes, cette partie n'est liée à aucun contexte en particulier. Il s'agit dans la grande majorité des cas de Bugs software! C'est pourquoi c'est aussi la partie la plus technique.
+
 - [Cas d'iCloud d'Apple](https://github.com/hackappcom/ibrute):
     - Très souvent les gens choisissent des mots de passe *faibles* et ont droit à plusieurs tentatives de login dans le cas où ils ne s'en souviennent pas. 
-    La plupart des services fournis par iCloud d'Apple contenaient cette fonction qui limite le nombre d'essais. Le seul problème est qu'il y'avait un seul service ("find my iPhone") qui ne comptait pas le nombre de tentatives. L'adversaire pouvait en un petit script faire autant de tentatives qu'il lui plaisait, aussi rapidement que le transferts de paquet via Internet (porbablement plusieurs millions de tentatives par jour). Un [tel script](https://github.com/hackappcom/ibrute) n'est pas du tout compliqué à mettre en place comme on peut le voir ici: 
+    La plupart des services fournis par iCloud d'Apple contenaient cette fonction qui limite le nombre d'essais. Le seul problème est qu'il y'avait un seul service ("find my iPhone") qui ne comptait pas le nombre de tentatives. L'adversaire pouvait en un petit script faire autant de tentatives qu'il lui plaisait, aussi rapidement que le transferts de paquet via Internet (porbablement plusieurs millions de tentatives par jour). Un [tel script](https://github.com/hackappcom/ibrute) n'est pas du tout compliqué à mettre en place comme on peut le voir ici dans le cas de Python: 
     ```
         import json
         import urllib2
@@ -174,4 +176,14 @@ Il faut expliciter le plus possible les modèles de menace afin de voir plus fac
 
 
 - [Bitcoin via Android](https://bitcoin.org/en/alert/2013-08-11-android)
-    - Le bitcoin d'un compte peut être dépensé par quiconque connaît la clé privée de ce compte. Or en 2013 plusieurs applications Android ui gèrent les portefeuilles bitcoin utilisaient [l'API Java: SecureRandom](https://docs.oracle.com/javase/8/docs/api/java/security/SecureRandom.html). Or il se trouvait que ce système utilise un générateur de nombre aléatoire comme le décrit la doc *"Many SecureRandom implementations are in the form of a pseudo-random number generator (PRNG), which means they use a deterministic algorithm to produce a pseudo-random sequence from a true random seed."*. Mais ce que peu de gens ont vu, c'est que le code comportait un petit bug, et que dans certains cas particuliers, le système oubliait de donner de *seed* à PRNG. En conséquence beaucoup de clés privées ont été très faciles à deviner par les attaquants qui ont dépensé tous les bitcoins qui leur passaient par les mains. 
+    - Le bitcoin d'un compte peut être dépensé par quiconque connaît la clé privée de ce compte. Or en 2013 plusieurs applications Android ui gèrent les portefeuilles bitcoin utilisaient [l'API Java: SecureRandom](https://docs.oracle.com/javase/8/docs/api/java/security/SecureRandom.html). Or il se trouvait que ce système utilise un générateur de nombre aléatoire comme le décrit la doc *"Many SecureRandom implementations are in the form of a pseudo-random number generator (PRNG), which means they use a deterministic algorithm to produce a pseudo-random sequence from a true random seed."*.
+    ```
+    SecureRandom random = new SecureRandom();
+    byte bytes[] = new byte[20];
+    random.nextBytes(bytes);
+    ```
+    Et on genère le *Seed* de la manière suivante:
+    ```
+    byte seed[] = random.generateSeed(20);
+    ```
+     Mais ce que peu de gens ont vu, c'est que le code comportait un petit bug, et que dans certains cas particuliers, le système oubliait de donner de *seed* à PRNG. En conséquence beaucoup de clés privées ont été très faciles à deviner par les attaquants qui ont dépensé tous les bitcoins qui leur passaient par les mains. 
