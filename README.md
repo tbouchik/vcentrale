@@ -1,18 +1,7 @@
-# go-go-ghpages
+# Les vulnérabilités des systèmes d'information 
 
-An intro workshop about GitHub Pages and Jekyll. 
+Très souvent les systèmes d'information sont connectés à Internet, lequel abrite des adversaires. C'est pouquoi l'architecture ainsi que le *design* de tels systèmes, doit prendre en question la question de sécurité, i.e est ce que le système est résilient en cas d'attaque.
 
-https://evanwill.github.io/go-go-ghpages/
+Cette veille technologique a pour but d'introduire le lecteur aux différentes failles qu'il faut connaître et surtout éviter, lorsqu'on conçoit un système d'information. Il est de plus en plus urgent de se prémunir des outils de défense et d'éduquer les producteurs ainsi que les consommateurs sur les failles de sécurité avec la prolifération des objets IoT dans nos vies quotidiennes ainsi que l'intrusion de l'IA dans tous les domaines.
 
-# Build a Website with Jekyll and GitHub Pages 
-
-With [GitHub pages](https://pages.github.com/) and [Jekyll](https://jekyllrb.com/) you can quickly create and publish a website for free! 
-It is an ideal solution for creating a simple project or personal site to highlight your academic work. 
-
-This workshop will introduce the basics of using the popular static website generator Jekyll integrated with GitHub pages. 
-You will learn how to set up a project repository, write content in Markdown, and publish your site, all using GitHub's user friendly web interface. 
-Advanced usage of Jekyll for local web development is introduced final section.
-
-### Hosted at [University of Idaho Library](http://www.lib.uidaho.edu/) April 2017, Oct 2018
-
-> licensed [cc-by-sa](https://creativecommons.org/licenses/by-sa/4.0/) <a href="https://github.com/evanwill">evan will</a> 2018
+L'étude de ces failles se décomposera en deux parties: Les failles du *côté serveur* puis les failles *côté client*.
