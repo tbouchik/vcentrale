@@ -56,6 +56,9 @@ Le problème avec le modèle de menace (i.e l'ensemble des suppositions faites l
 - Facteur humain
     - Souvent le facteur humain est écarté (à tort) des éventuelles menaces. Mais c'est une erreur classique: Il suffit qu'un utilisateur pas très concentré clique sur un lien d'un email (Phishing) frauduleux, pour qu'il installe à son insu le malware sur son système. Ce qui est encore plus grave si celui ci dispose de droits privilégiés. Un autre exemple classique est que l'employé d'une entreprise reçoive un appel très persuasif de la part d'un prétendu chef pour qu'il fasse fuiter des informations comprométentes.
 
+    {% include figure.html file="hfactor.png" alt="github octocat" width="75%" %}
+
+
 - Kerberos
     - L'exemple de Kerberos illustre parfaitement le fait que les suppositions du modèle de menace sont profondémenet ancrées dans un contexte particulier.
     Kerberos est un protocole d'authentification crée par le MIT au milieu des années 80, qui se basait sur une clé 56-bit DES. À l'époque vérifier les 2^56 possibilités semblait impossible.

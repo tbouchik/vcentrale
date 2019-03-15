@@ -24,7 +24,7 @@ repo: "https://github.com/tbouchik/vcentrale"
 # your gh-pages url: https://username.github.io
 url: https://tbouchik.github.io
 # your repository name: /repository
-baseurl: /go-go-ghpages
+baseurl: /veille_techno
 
 # analytics if desired (and use environment variable on build command)
 google_analytics: UA-74844011-1

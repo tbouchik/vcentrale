@@ -1,6 +1,6 @@
 ---
 title: 4-Advanced
-nav: true
+nav: false
 ---
 
 # Developing with Jekyll

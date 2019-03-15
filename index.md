@@ -3,8 +3,7 @@ title: Home
 ---
 
 <div> 
-    <img src="{{ '/images/octocat.jpg' | absolute_url }}" alt="github octocat" style="width:45%;" >
-    <img src="{{ '/images/jekyll.png' | absolute_url }}" alt="jekyll icon" style="width:45%;" >
+    <img src="{{ '/images/cyber.jpg' | absolute_url }}" alt="github octocat" style="width:100%;" >
 </div>
 
 # Les vulnérabilités des systèmes d'information 
@@ -17,8 +16,6 @@ L'étude de ces failles se décomposera en deux parties: Les failles du *côté 
 
 
 
-Watch [workshop screen cast](https://youtu.be/SWVjQsvQocA){:target="_blank"} (2017) for full content.
-
 <div class="toc" markdown="1">
 ## Sommaire:
 
@@ -27,10 +24,6 @@ Watch [workshop screen cast](https://youtu.be/SWVjQsvQocA){:target="_blank"} (20
 {% endfor %}
 </div>
 
-Hosted at [University of Idaho Library](http://www.lib.uidaho.edu/){:target="_blank"} April 2017, Oct 2018
 
 > built using [Jekyll](https://jekyllrb.com/), [GitHub Pages](https://pages.github.com/), and [workshop-template](https://github.com/evanwill/workshop-template).
 >
-> licensed cc-by-sa <a href="https://github.com/evanwill">evan will</a> {{ site.pub_year }}. (get [source code]({{ site.repo }}))
-> 
-> <a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="license"><img style="border-width: 0;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Creative Commons License" /></a>
