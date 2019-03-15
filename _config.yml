@@ -26,8 +26,6 @@ url: https://tbouchik.github.io
 # your repository name: /repository
 baseurl: /veille_techno
 
-# analytics if desired (and use environment variable on build command)
-google_analytics: UA-74844011-1
 
 # defaults (to simplify front matter)
 defaults:
