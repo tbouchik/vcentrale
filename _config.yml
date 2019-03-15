@@ -24,7 +24,7 @@ repo: "https://github.com/tbouchik/vcentrale"
 # your gh-pages url: https://username.github.io
 url: https://tbouchik.github.io
 # your repository name: /repository
-baseurl: /veille_techno
+baseurl: /vcentrale
 
 
 # defaults (to simplify front matter)
